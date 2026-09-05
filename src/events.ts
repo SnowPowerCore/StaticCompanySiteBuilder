@@ -9,7 +9,7 @@ var _events = {}
  * @param {function} callback
  * @param {string} [namespace]
  */
-export function on(event, callback, namespace)
+export function on(event, callback, namespace?)
 {
     if (!isFunction(callback)) return;
     if (!_events[event]) _events[event] = [];
@@ -22,7 +22,7 @@ export function on(event, callback, namespace)
  * @param {function} callback
  * @param {string} [namespace]
  */
-export function once(event, callback, namespace)
+export function once(event, callback, namespace?)
 {
     if (!isFunction(callback)) return;
     const cb = (...args) => {
@@ -38,7 +38,7 @@ export function once(event, callback, namespace)
  * @param {function} callback
  * @param {string} [namespace]
  */
-export function only(event, callback, namespace)
+export function only(event, callback, namespace?)
 {
     _events[event] = isFunction(callback) ? [callback, isString(namespace)] : [];
 }

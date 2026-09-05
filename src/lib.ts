@@ -135,7 +135,7 @@ export function parallel(tasks, callback, direct = true)
 export function toDate(val, dflt, invalid)
 {
     if (isFunction(val?.getTime)) return val;
-    var d = NaN;
+    var d: any = NaN;
     // String that looks like a number
     if (isString(val)) {
         val = /^[0-9.]+$/.test(val) ? toNumber(val) : val.replace(/([0-9])(AM|PM)/i, "$1 $2");
@@ -157,7 +157,7 @@ export function toDate(val, dflt, invalid)
  * @param {boolean} [age] - if true duration from now, as age
  * @return {string}
  */
-export function toDuration(mtime, age)
+export function toDuration(mtime, age?)
 {
     var str = "";
     mtime = isNumber(mtime) ?? toNumber(mtime);
@@ -207,7 +207,7 @@ export function toDuration(mtime, age)
 export function toSize(size, decimals = 2)
 {
     var i = size > 0 ? Math.floor(Math.log(size) / Math.log(1024)) : 0;
-    return (size / Math.pow(1024, i)).toFixed(isNumber(decimals) ?? 2) * 1 + ' ' +
+    return Number((size / Math.pow(1024, i)).toFixed(isNumber(decimals) ?? 2)) + ' ' +
            [__('Bytes'), __('KBytes'), __('MBytes'), __('GBytes'), __('TBytes')][i];
 }
 
@@ -217,7 +217,7 @@ export function toSize(size, decimals = 2)
  * @param {int} [minlen]
  * @return {string}
  */
-export function toTitle(name, minlen)
+export function toTitle(name, minlen?)
 {
     return isString(name) ?
            minlen > 0 && name.length <= minlen ? name :
@@ -284,7 +284,7 @@ export function split(str, sep, options)
     var list = (Array.isArray(str) ? str : (isString(str) ? str : String(str)).split(sep || /[,|]/)), len = list.length;
     if (!len) return list;
 
-    var rc = [], keys = isObject(options) ? Object.reys(options) : [], v;
+    var rc = [], keys = isObject(options) ? Object.keys(options) : [], v;
     for (let i = 0; i < len; ++i) {
         v = list[i];
         if (v === "" && !options?.keepempty) continue;
@@ -459,7 +459,7 @@ function isattr(attr, list)
  * @param {boolean} list - if true return a list of Nodes
  * @return {Node[]|string}
  */
-export function sanitizer(html, list)
+export function sanitizer(html, list?)
 {
     if (!isString(html)) return list ? [] : html;
     const body = $parse(html);

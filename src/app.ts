@@ -3,7 +3,17 @@
  * @namespace app
  */
 
-export var app = {
+export interface AppRegistry {
+    [key: string]: any;
+    base: string;
+    $target: string;
+    index: string;
+    event: string;
+    templates: Record<string, any>;
+    components: Record<string, any>;
+}
+
+export var app: AppRegistry = {
 
     /**
      * @var {string} - Defines the root path for the application, must be framed with slashes.
@@ -141,7 +151,7 @@ export function isElement(element) { return element instanceof HTMLElement && el
  * @param {string} str
  * @returns {string}
  */
-export function toCamel(str)
+export function toCamel(str, _options?)
 {
     return isString(str) ? str.toLowerCase().replace(/[.:_-](\w)/g, (_, c) => c.toUpperCase()) : ""
 }
@@ -167,9 +177,9 @@ export function toCamel(str)
  * toNumber("1.23", { float: 1, dflt: 0, min: 0, max: 2 })
  * 1.23
  */
-export function toNumber(val, options)
+export function toNumber(val, options?): any
 {
-    var n = 0;
+    var n: any = 0;
     if (typeof val == "number") {
         n = val;
     } else
@@ -181,7 +191,7 @@ export function toNumber(val, options)
         } else {
             // Autodetect floating number
             var f = typeof options?.float == "undefined" || options?.float == null ? /^(-|\+)?([0-9]+)?\.[0-9]+$/.test(val) : options?.float;
-            n = val[0] == 't' ? 1 : val[0] == 'f' ? 0 : val == "infinity" ? Infinity : (f ? parseFloat(val, 10) : parseInt(val, 10));
+            n = val[0] == 't' ? 1 : val[0] == 'f' ? 0 : val == "infinity" ? Infinity : (f ? parseFloat(val) : parseInt(val));
         }
     }
     n = isNaN(n) ? options?.dflt || 0 : n;
@@ -211,7 +221,7 @@ export function toNumber(val, options)
  * app.call(obj, func, ...)
  * app.call(obj, method, ...)
  */
-export function call(obj, method, ...args)
+export function call(obj, method?, ...args: any[])
 {
     if (isFunction(obj)) return obj(method, ...args);
     if (typeof obj != "object") return;

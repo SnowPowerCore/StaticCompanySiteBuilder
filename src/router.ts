@@ -75,12 +75,12 @@ export function savePath(options)
 {
     if (isString(options)) options = { name: options };
     if (!options?.name) return;
-    var path = [options.name];
+    var pathParts: string[] = [options.name];
     if (options?.params) {
-        for (let i = 1; i < 7; i++) path.push(options.params[`param${i}`] || "");
+        for (let i = 1; i < 7; i++) pathParts.push(options.params[`param${i}`] || "");
     }
-    while (!path.at(-1)) path.length--;
-    path = path.join("/");
+    while (!pathParts.at(-1)) pathParts.length--;
+    const path = pathParts.join("/");
     trace("savePath:", path, options);
     if (!path) return;
     emit("path:push", window.location.origin + app.base + path);

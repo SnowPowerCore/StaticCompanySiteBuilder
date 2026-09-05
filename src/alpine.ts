@@ -130,7 +130,7 @@ function $render(el, value, modifiers, callback)
 
 function $template(el, value, modifiers)
 {
-    const mods = {};
+    const mods: Record<string, string> = {};
 
     const toMods = (tmpl) => {
         for (let i = 0; i < modifiers.length; i++) {

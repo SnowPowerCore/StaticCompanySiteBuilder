@@ -4,8 +4,24 @@ import { emit, on } from "./events"
 import { $ } from "./dom"
 import { parsePath } from "./router"
 
-var _plugins = {}
-var _default_plugin;
+interface RenderPlugin {
+    [key: string]: any;
+    render?: (element: HTMLElement, options: any) => any;
+    cleanup?: (element: HTMLElement) => any;
+    data?: (element?: HTMLElement, level?: number) => any;
+    init?: () => any;
+    Component?: any;
+    default?: boolean;
+}
+
+interface PrepareDeleteEvent {
+    name: any;
+    params: any;
+    stop?: boolean;
+}
+
+var _plugins: Record<string, RenderPlugin> = {};
+var _default_plugin: RenderPlugin | undefined;
 
 /**
  * Register a render plugin, at least 2 functions must be defined in the options object:
@@ -86,7 +102,7 @@ export function $data(element, level)
  * @param {string} [dflt]
  * @returns {object} in format { name, params, template, component }
  */
-export function resolve(path, dflt)
+export function resolve(path, dflt?)
 {
     const tmpl = parsePath(path);
     trace("resolve:", path, dflt, tmpl);
@@ -134,7 +150,7 @@ export function resolve(path, dflt)
  * @param {string} [dflt]
  * @returns {object|undefined}
  */
-export function render(options, dflt)
+export function render(options, dflt?)
 {
     var tmpl = resolve(options, dflt);
     if (!tmpl) return;
@@ -154,7 +170,7 @@ export function render(options, dflt)
     // Replacing main component
     if (params.$target == app.$target) {
         // Ask if it can be destroyed first
-        var ev = { name: tmpl.name, params };
+        var ev: PrepareDeleteEvent = { name: tmpl.name, params };
         emit(app.event, "prepare:delete", ev);
         if (ev.stop) return;
 
@@ -207,4 +223,3 @@ on("alpine:init", () => {
         if (isElement(ev?.element)) applyStylePlugins(ev.element);
     });
 });
-

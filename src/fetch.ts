@@ -7,7 +7,15 @@ import { call, isFunction, isObject, isString, trace } from "./app"
  * fetchOptions.method = "POST"
  * await afetch("url.com")
  */
-export var fetchOptions = {
+export interface FetchOptions {
+    [key: string]: any;
+    method: string;
+    cache: RequestCache;
+    csrfHeader?: string;
+    headers: Record<string, string>;
+}
+
+export var fetchOptions: FetchOptions = {
     method: "GET",
     cache: "default",
     headers: {},

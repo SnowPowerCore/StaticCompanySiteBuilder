@@ -9,7 +9,8 @@ import { emit, off, on } from "./events"
  * @class
  */
 export class Component {
-    params = {};
+    [key: string]: any;
+    params: Record<string, any> = {};
 
     constructor(name, params) {
         this.$name = name;

@@ -22,7 +22,7 @@ const esc = (selector) => (selector.replace(/#([^\s"#']+)/g, (_, id) => `#${CSS.
  * @example
  * var el = app.$("#div")
  */
-export function $(selector, doc)
+export function $(selector, doc?)
 {
     return isString(selector) ? (isElement(doc) || document).querySelector(esc(selector)) : null
 }
@@ -35,7 +35,7 @@ export function $(selector, doc)
  * @example
  * Array.from(app.$all("input")).find((el) => !(el.readOnly || el.disabled || el.type == "hidden"));
  */
-export function $all(selector, doc)
+export function $all(selector, doc?)
 {
     return isString(selector) ? (isElement(doc) || document).querySelectorAll(esc(selector)) : null
 }
@@ -102,7 +102,7 @@ export function $attr(element, attr, value)
  * @param {functions} [cleanup]
  * @returns {HTMLElement}
  */
-export function $empty(element, cleanup)
+export function $empty(element, cleanup?)
 {
     if (isString(element)) element = $(element);
     if (!isElement(element)) return;
@@ -169,7 +169,7 @@ export function $elem(name, ...args)
  * @example
  * document.append(...$parse("<div>...</div>"), 'list'))
  */
-export function $parse(html, format)
+export function $parse(html, format?)
 {
     html = new window.DOMParser().parseFromString(html || "", 'text/html');
     return format === "doc" ? html : format === "list" ? Array.from(html.body.childNodes) : html.body;
@@ -183,7 +183,7 @@ export function $parse(html, format)
  * @example
  * app.$append(document, "<div>...</div>")
  */
-export function $append(element, template, setup)
+export function $append(element, template, setup?)
 {
     if (isString(element)) element = $(element);
     if (!isElement(element)) return;

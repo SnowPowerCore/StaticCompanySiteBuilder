@@ -86,7 +86,7 @@ export function showToast(container, type, text, options)
     var t = o.type[0];
     var delay = o.delay * (t == "d" || t == "w" ? 3 : t == "i" ? 2 : 1);
     var icon = o.icon || t == "s" ? "fa-check-circle" : t == "d" ? "fa-exclamation-circle" : t == "w" ? "fa-exclamation-triangle": "fa-info-circle";
-    var fmt = Intl.DateTimeFormat({ timeStyle: "short" });
+    var fmt = Intl.DateTimeFormat(undefined, { timeStyle: "short" });
     var html = `
     <div class="toast fade show ${o.type} ${o.css || ""}" role="${o.role}" aria-live="polite" aria-atomic="true" data-bs-autohide="${!o.dismiss}" data-bs-delay="${delay}">
       <div class="toast-header ${o.css_header || ""}">
