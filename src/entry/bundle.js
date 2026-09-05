@@ -139,7 +139,7 @@
   function isElement(element) {
     return element instanceof HTMLElement && element;
   }
-  function toCamel(str) {
+  function toCamel(str, _options) {
     return isString(str) ? str.toLowerCase().replace(/[.:_-](\w)/g, (_, c) => c.toUpperCase()) : "";
   }
   function toNumber(val, options) {
@@ -153,7 +153,7 @@
         n = options?.dflt || 0;
       } else {
         var f = typeof options?.float == "undefined" || options?.float == null ? /^(-|\+)?([0-9]+)?\.[0-9]+$/.test(val) : options?.float;
-        n = val[0] == "t" ? 1 : val[0] == "f" ? 0 : val == "infinity" ? Infinity : f ? parseFloat(val, 10) : parseInt(val, 10);
+        n = val[0] == "t" ? 1 : val[0] == "f" ? 0 : val == "infinity" ? Infinity : f ? parseFloat(val) : parseInt(val);
       }
     }
     n = isNaN(n) ? options?.dflt || 0 : n;
@@ -462,12 +462,12 @@
   function savePath(options) {
     if (isString(options)) options = { name: options };
     if (!options?.name) return;
-    var path = [options.name];
+    var pathParts = [options.name];
     if (options?.params) {
-      for (let i = 1; i < 7; i++) path.push(options.params[`param${i}`] || "");
+      for (let i = 1; i < 7; i++) pathParts.push(options.params[`param${i}`] || "");
     }
-    while (!path.at(-1)) path.length--;
-    path = path.join("/");
+    while (!pathParts.at(-1)) pathParts.length--;
+    const path = pathParts.join("/");
     trace("savePath:", path, options);
     if (!path) return;
     emit("path:push", window.location.origin + app.base + path);
