@@ -6,7 +6,7 @@ const esbuild = require("esbuild");
 const plugin = require(__dirname + "/esbuild-app");
 
 const opts = {
-    entryPoints: [path.resolve(__dirname, '..', 'src', 'entry', 'index.js')],
+    entryPoints: [path.resolve(__dirname, '..', 'src', 'entry', 'index.ts')],
     outfile: 'bundle.js',
     platform: 'browser',
     metafile: true,

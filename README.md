@@ -4,6 +4,18 @@
 
 ### The Vision
 
+The authored library source is written in TypeScript and bundled with esbuild. Alpine.js remains the UI runtime: `AlpinePlugin` registers the custom elements, directives, magics, and component data bridge used by the library.
+
+Install dependencies and run the checks with:
+
+```sh
+npm install
+npm run typecheck
+npm run build
+```
+
+The TypeScript migration is intentionally incremental. The public JavaScript API and Alpine integration remain unchanged while types are added around the existing dynamic component and template registries.
+
 - **_To maintain a clear separation between HTML and JavaScript logic._**
 
   This separation keeps presentation distinct from logic as much as possible and have as few abstractions as possible.

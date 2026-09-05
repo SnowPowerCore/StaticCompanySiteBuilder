@@ -1,5 +1,5 @@
 
-import * as all from '../src/index.js'
+import * as all from '../src/index.ts'
 
 Object.assign(all.app, all)
 
