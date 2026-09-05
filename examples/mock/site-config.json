@@ -1,0 +1,189 @@
+{
+  "sectionOrder": [
+    "header",
+    "features",
+    "projects",
+    "technologies",
+    "team",
+    "partnerships",
+    "partners",
+    "successCases",
+    "contact",
+    "footer"
+  ],
+  "api": {
+    "siteConfigEndpoint": "./mock/site-config.json",
+    "highlightsEndpoint": "./mock/company-highlights.json",
+    "contactEndpoint": "./mock/contact-response.json"
+  },
+  "sections": {
+    "header": {
+      "companyName": "Static Company",
+      "logoText": "SC",
+      "motto": "Configurable static websites with API-ready sections",
+      "links": [
+        { "label": "Features", "href": "#features" },
+        { "label": "Projects", "href": "#projects" },
+        { "label": "Team", "href": "#team" },
+        { "label": "Contact", "href": "#contact" }
+      ],
+      "meetingButtonText": "Schedule a meeting",
+      "meetingUrl": "mailto:hello@staticcompany.example"
+    },
+    "features": {
+      "title": "What we provide",
+      "subtitle": "All blocks are configurable and prepared for admin-panel ownership",
+      "items": [
+        {
+          "title": "Section Modeling",
+          "description": "Every block has a dedicated JSON shape for straightforward backend editing."
+        },
+        {
+          "title": "Composable Layout",
+          "description": "Sections can be reordered using sectionOrder without template rewrites."
+        },
+        {
+          "title": "REST Data Loading",
+          "description": "Main page hydrates from REST endpoints with fallback behavior."
+        },
+        {
+          "title": "Future Admin Panel Ready",
+          "description": "Data contract already exists so a separate admin app can publish it."
+        }
+      ]
+    },
+    "technologies": {
+      "title": "Technology focus",
+      "filters": ["All", "Frontend", "Backend", "Cloud", "Data"],
+      "tags": [
+        { "label": "Alpine.js", "group": "Frontend" },
+        { "label": "Bootstrap", "group": "Frontend" },
+        { "label": "Node.js", "group": "Backend" },
+        { "label": "Express", "group": "Backend" },
+        { "label": "OpenAPI", "group": "Backend" },
+        { "label": "Azure", "group": "Cloud" },
+        { "label": "GitHub Actions", "group": "Cloud" },
+        { "label": "PostgreSQL", "group": "Data" },
+        { "label": "Redis", "group": "Data" }
+      ]
+    },
+    "team": {
+      "title": "Our team",
+      "members": [
+        {
+          "name": "Marta Greene",
+          "avatar": "MG",
+          "position": "Lead Engineer",
+          "description": "Leads architecture and frontend quality standards.",
+          "experienceYears": 11,
+          "projectsCount": 27
+        },
+        {
+          "name": "Daniel Park",
+          "avatar": "DP",
+          "position": "Solutions Architect",
+          "description": "Defines integration and platform modernization plans.",
+          "experienceYears": 9,
+          "projectsCount": 21
+        },
+        {
+          "name": "Ivy Morrison",
+          "avatar": "IM",
+          "position": "Product Designer",
+          "description": "Designs product UX and reusable visual systems.",
+          "experienceYears": 8,
+          "projectsCount": 19
+        }
+      ]
+    },
+    "projects": {
+      "title": "Project highlights",
+      "items": [
+        {
+          "type": "E-commerce",
+          "title": "Marketplace Revamp",
+          "description": "Improved checkout performance and introduced API-first storefront.",
+          "image": "https://picsum.photos/seed/marketplace/3840/2160"
+        },
+        {
+          "type": "SaaS",
+          "title": "Analytics Workspace",
+          "description": "Built configurable dashboards for client teams.",
+          "image": "https://picsum.photos/seed/analytics/3840/2160"
+        },
+        {
+          "type": "Enterprise",
+          "title": "Partner Portal",
+          "description": "Unified onboarding and collaboration tools into one portal.",
+          "image": "https://picsum.photos/seed/partner/3840/2160"
+        }
+      ]
+    },
+    "partnerships": {
+      "title": "Partnership opportunities",
+      "items": [
+        {
+          "title": "Technology Partner",
+          "description": "Build integrations and product accelerators together."
+        },
+        {
+          "title": "Implementation Partner",
+          "description": "Deliver integration projects with shared execution models."
+        },
+        {
+          "title": "Referral Partner",
+          "description": "Collaborate through referrals and strategic introductions."
+        },
+        {
+          "title": "Reseller Partner",
+          "description": "Package and resell solutions under your GTM channels."
+        }
+      ]
+    },
+    "partners": {
+      "title": "Trusted by partners",
+      "items": [
+        { "name": "BlueNova" },
+        { "name": "Vertex Labs" },
+        { "name": "Cloudbees Co" },
+        { "name": "NorthBridge" },
+        { "name": "Atlas Digital" }
+      ]
+    },
+    "successCases": {
+      "title": "Success cases",
+      "items": [
+        {
+          "title": "Retail modernization",
+          "description": "Cut load time by 48% and increased conversion by 17%."
+        },
+        {
+          "title": "B2B onboarding",
+          "description": "Reduced onboarding time from 10 days to 48 hours."
+        },
+        {
+          "title": "Support automation",
+          "description": "Reduced first response time by 37%."
+        }
+      ],
+      "highlights": [
+        { "label": "Delivered projects", "value": 120 },
+        { "label": "Partner organizations", "value": 45 },
+        { "label": "Avg. satisfaction", "value": "4.9/5" }
+      ]
+    },
+    "contact": {
+      "title": "Feedback & contact",
+      "subtitle": "Tell us what you need and we will respond within one business day.",
+      "successMessage": "Thanks! Your request has been recorded."
+    },
+    "footer": {
+      "copyright": "© 2026 Static Company. All rights reserved.",
+      "links": [
+        { "label": "Privacy", "href": "#" },
+        { "label": "Terms", "href": "#" },
+        { "label": "Careers", "href": "#" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <title>Alpinejs-app Demo</title>
+
+    <style type="text/css">
+        body, div { padding:1em }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script type=module src="bundle.mjs"></script>
+
+</head>
+
+<body class="text-center"></div>
+
+    <div id="app-main"></div>
+</body>
+
+<template id="index">
+    <h3 class="py-3">Alpinejs-app: This is the index component</h3>
+
+    <h6>The app is bundled by esbuild into a single bundle.js, all .js and .html files are imported in the index.js</h6>
+
+    <div x-template="'dashboard'"></div>
+</template>
+
+</html>

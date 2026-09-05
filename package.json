@@ -1,0 +1,41 @@
+{
+  "version": "1.5.2",
+  "name": "alpinejs-app",
+  "description": "Simple SPA plugin for Alpinejs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vseryakov/alpinejs-app.git"
+  },
+  "author": "Vlad Seryakov",
+  "license": "MIT",
+  "keywords": [
+    "Alpine JS",
+    "Alpine JS SPA",
+    "esbuild-jsdoc"
+  ],
+  "module": "dist/app.mjs",
+  "unpkg": "dist/app.min.js",
+  "files": [
+    "dist/",
+    "src/",
+    "scripts/"
+  ],
+  "scripts": {
+    "demo": "sh scripts/demo.sh",
+    "build": "node scripts/build.js && npm run docs",
+    "devbuild": "node scripts/build.js",
+    "start": "cd examples && npm run start",
+    "docs": "rm -rf docs/web && jsdoc -c docs/jsdoc.js"
+  },
+  "devDependencies": {
+    "alpinejs": "^3.15.8",
+    "esbuild": "^0.27.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "parserOptions": {
+      "ecmaVersion": 2022,
+      "sourceType": "module"
+    }
+  }
+}

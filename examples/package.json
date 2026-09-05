@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "name": "demo",
+  "scripts": {
+    "build": "node ../scripts/build-app.js",
+    "devbuild": "node ../scripts/build-app.js",
+    "start": "node ../scripts/build-app.js --watch --serve"
+  }
+}

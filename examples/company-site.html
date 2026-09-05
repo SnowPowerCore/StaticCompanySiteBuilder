@@ -1,0 +1,197 @@
+<div class="container py-4 site-shell" x-cloak>
+    <div class="alert alert-info" x-show="loadingConfig">Loading site configuration...</div>
+
+    <template x-if="!loadingConfig">
+        <div>
+            <template x-for="section in sectionOrder" :key="section">
+                <section class="mb-5" :id="section">
+
+                    <div x-show="section == 'header'" class="border-0 rounded p-4 hero-gradient shadow-sm section-card">
+                        <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+                            <div>
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <span class="badge text-bg-light text-dark fs-6" x-text="site.sections.header.logoText"></span>
+                                    <h1 class="h3 m-0 fw-bold"><span class="me-2">💖</span><span x-text="site.sections.header.companyName"></span></h1>
+                                </div>
+                                <p class="mb-2 opacity-75" x-text="site.sections.header.motto"></p>
+                                <nav class="d-flex gap-3 flex-wrap">
+                                    <template x-for="link in site.sections.header.links" :key="link.label">
+                                        <a :href="link.href" class="hero-nav-link" x-text="link.label"></a>
+                                    </template>
+                                </nav>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button class="btn nav-button" :class="activeTheme == 'dark' ? 'btn-outline-light' : 'btn-outline-dark'" @click="toggleTheme" :aria-label="activeTheme == 'light' ? 'Switch to dark theme' : 'Switch to light theme'" title="Toggle theme">
+                                    <span x-show="activeTheme == 'light'">☀️</span>
+                                    <span x-show="activeTheme == 'dark'">🌙</span>
+                                </button>
+                                <a class="btn btn-outline-light nav-button" :href="site.sections.header.meetingUrl">📅 <span x-text="site.sections.header.meetingButtonText"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div x-show="section == 'features'">
+                        <h2 class="h4 mb-1 section-heading">🚀 <span x-text="site.sections.features.title"></span></h2>
+                        <p class="text-body-secondary" x-text="site.sections.features.subtitle"></p>
+                        <div class="row g-3">
+                            <template x-for="item in site.sections.features.items" :key="item.title">
+                                <div class="col-12 col-md-6 col-xl-3">
+                                    <article class="border rounded p-3 h-100 bg-body-tertiary hover-lift section-card">
+                                        <h3 class="h6" x-text="item.title"></h3>
+                                        <p class="small text-body-secondary mb-0" x-text="item.description"></p>
+                                    </article>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div x-show="section == 'technologies'">
+                        <h2 class="h4 mb-3 section-heading">🧰 <span x-text="site.sections.technologies.title"></span></h2>
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <template x-for="name in site.sections.technologies.filters" :key="name">
+                                <button class="btn btn-sm" :class="activeTheme == 'dark' ? (technologyFilter == name ? 'btn-light text-dark' : 'btn-outline-light') : (technologyFilter == name ? 'btn-dark' : 'btn-outline-dark')" @click="technologyFilter = name" x-text="name"></button>
+                            </template>
+                        </div>
+                        <div class="d-flex gap-2 overflow-auto px-3 pt-2 pb-4">
+                            <template x-for="tag in filteredTechnologies" :key="tag.label">
+                                <span class="badge text-bg-secondary fs-6 p-2 text-nowrap tag-pill hover-lift">💡 <span x-text="tag.label"></span> • <span x-text="tag.group"></span></span>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div x-show="section == 'team'">
+                        <h2 class="h4 mb-3 section-heading">🧑‍💼 <span x-text="site.sections.team.title"></span></h2>
+                        <div class="d-flex gap-3 overflow-auto px-3 pt-2 pb-4">
+                            <template x-for="member in site.sections.team.members" :key="member.name">
+                                <article class="border rounded p-3 bg-body-tertiary hover-lift section-card" style="min-width: 280px;">
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <span class="badge rounded-pill text-bg-primary" x-text="member.avatar"></span>
+                                        <div>
+                                            <div class="fw-semibold" x-text="member.name"></div>
+                                            <div class="small text-body-secondary" x-text="member.position"></div>
+                                        </div>
+                                    </div>
+                                    <p class="small" x-text="member.description"></p>
+                                    <div class="small text-body-secondary">
+                                        <span x-text="member.experienceYears"></span> years • <span x-text="member.projectsCount"></span> projects
+                                    </div>
+                                </article>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div x-show="section == 'projects'">
+                        <h2 class="h4 mb-3 section-heading">🖼️ <span x-text="site.sections.projects.title"></span></h2>
+                        <div id="projectsCarousel" class="carousel slide">
+                            <div class="carousel-inner rounded border">
+                                <template x-for="(project, index) in site.sections.projects.items" :key="project.title">
+                                    <div class="carousel-item" :class="index == 0 ? 'active' : ''">
+                                        <img :src="project.image" class="d-block w-100" :alt="project.title">
+                                        <div class="p-3 bg-body-tertiary">
+                                            <span class="badge text-bg-dark mb-2" x-text="project.type"></span>
+                                            <h3 class="h5 mb-1" x-text="project.title"></h3>
+                                            <p class="small text-body-secondary mb-0" x-text="project.description"></p>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="d-flex align-items-center gap-3 mb-2">
+                                <div class="small text-body-secondary">Last action: <span x-text="lastCarouselAction"></span></div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" @click="carouselPrev()" data-bs-target="#projectsCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" @click="carouselNext()" data-bs-target="#projectsCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div x-show="section == 'partnerships'">
+                        <h2 class="h4 mb-3 section-heading">🤝 <span x-text="site.sections.partnerships.title"></span></h2>
+                        <div class="row g-3">
+                            <template x-for="item in site.sections.partnerships.items" :key="item.title">
+                                <div class="col-12 col-md-6">
+                                    <article class="border rounded p-3 h-100 hover-lift section-card">
+                                        <h3 class="h6" x-text="item.title"></h3>
+                                        <p class="small text-body-secondary mb-0" x-text="item.description"></p>
+                                    </article>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div x-show="section == 'partners'">
+                        <h2 class="h4 mb-3 section-heading">🌐 <span x-text="site.sections.partners.title"></span></h2>
+                        <div class="row g-3">
+                            <template x-for="item in site.sections.partners.items" :key="item.name">
+                                <div class="col-6 col-md-4 col-lg-2">
+                                    <div class="border rounded p-3 text-center bg-body-tertiary hover-lift section-card" x-text="item.name"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div x-show="section == 'successCases'">
+                        <h2 class="h4 mb-3 section-heading">🏆 <span x-text="site.sections.successCases.title"></span></h2>
+                        <div class="alert alert-secondary py-2" x-text="highlightsStatus"></div>
+                        <div class="row g-3 mb-3">
+                            <template x-for="item in site.sections.successCases.highlights" :key="item.label">
+                                <div class="col-12 col-md-4">
+                                    <div class="border rounded p-3 bg-body-tertiary text-center hover-lift section-card">
+                                        <div class="small text-body-secondary" x-text="item.label"></div>
+                                        <div class="h4 mb-0" x-text="item.value"></div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="row g-3">
+                            <template x-for="item in site.sections.successCases.items" :key="item.title">
+                                <div class="col-12 col-lg-4">
+                                    <article class="border rounded p-3 h-100 hover-lift section-card">
+                                        <h3 class="h6" x-text="item.title"></h3>
+                                        <p class="small text-body-secondary mb-0" x-text="item.description"></p>
+                                    </article>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div x-show="section == 'contact'">
+                        <h2 class="h4 mb-1 section-heading">💬 <span x-text="site.sections.contact.title"></span></h2>
+                        <p class="text-body-secondary" x-text="site.sections.contact.subtitle"></p>
+
+                        <form class="row g-3 border rounded p-3 bg-body-tertiary section-card" @submit.prevent="submitContact">
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="Your name" x-model="contactForm.name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="email" placeholder="Email" x-model="contactForm.email" required>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="4" placeholder="Message" x-model="contactForm.message" required></textarea>
+                            </div>
+                            <div class="col-12 d-flex align-items-center gap-3">
+                                <button class="btn btn-danger" type="submit">📨 Send request</button>
+                                <div class="alert py-2 px-3 mb-0" :class="'alert-' + contactStatusType" x-show="contactStatus" x-text="contactStatus"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                </section>
+            </template>
+
+            <footer class="border-top pt-3 d-flex justify-content-between flex-wrap gap-2" x-show="sectionOrder.includes('footer')">
+                <div class="small text-body-secondary" x-text="site.sections.footer.copyright"></div>
+                <div class="d-flex gap-3">
+                    <template x-for="link in site.sections.footer.links" :key="link.label">
+                        <a :href="link.href" class="small" x-text="link.label"></a>
+                    </template>
+                </div>
+            </footer>
+        </div>
+    </template>
+</div>
